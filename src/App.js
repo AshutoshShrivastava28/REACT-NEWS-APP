@@ -1,124 +1,131 @@
 import "./App.css";
 
-import React, { Component } from "react";
+import React, { useState } from "react";
 import Navbar from "./components/Navbar";
 import News from "./components/News";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoadingBar from "react-top-loading-bar";
 
-export default class App extends Component {
-  pageSize = 10;
-  state = {
-    progress: 0,
-  };
-  setProgress = (progress) => {
-    this.setState({ progress: progress });
-  };
-  render() {
-    return (
-      <div>
-        <Router>
-          <Navbar />
-          <LoadingBar
-            height={3}
-            color="#f11946"
-            progress={this.state.progress}
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+const App = () => {
+  const pageSize = 5;
+  const apiKey = process.env.REACT_APP_API_KEY;
+  const [progress, setProgress] = useState(0);
+  return (
+    <div>
+      <Router>
+        <Navbar />
+        <div>
+          <LoadingBar color="blue" height={5} progress={progress} />
+        </div>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <News
+                apiKey={apiKey}
+                setProgress={setProgress}
+                key="general"
+                pageSize={pageSize}
+                country="in"
+                category="general"
+              />
+            }
           />
-          <Routes>
-            <Route
-              exact
-              path="/"
-              element={
-                <News
-                  setProgress={this.setProgress}
-                  key="general"
-                  country="in"
-                  category="general"
-                  pageSize={this.pageSize}
-                />
-              }
-            />
-            <Route
-              exact
-              path="/sports"
-              element={
-                <News
-                  setProgress={this.setProgress}
-                  key="sports"
-                  country="in"
-                  category="sports"
-                  pageSize={this.pageSize}
-                />
-              }
-            />
-            <Route
-              exact
-              path="/science"
-              element={
-                <News
-                  setProgress={this.setProgress}
-                  key="science"
-                  country="in"
-                  category="science"
-                  pageSize={this.pageSize}
-                />
-              }
-            />
-            <Route
-              exact
-              path="/entertainment"
-              element={
-                <News
-                  setProgress={this.setProgress}
-                  key="entertainment"
-                  country="in"
-                  category="entertainment"
-                  pageSize={this.pageSize}
-                />
-              }
-            />
-            <Route
-              exact
-              path="/business"
-              element={
-                <News
-                  setProgress={this.setProgress}
-                  key="business"
-                  country="in"
-                  category="business"
-                  pageSize={this.pageSize}
-                />
-              }
-            />
-            <Route
-              exact
-              path="/technology"
-              element={
-                <News
-                  setProgress={this.setProgress}
-                  key="technology"
-                  country="in"
-                  category="technology"
-                  pageSize={this.pageSize}
-                />
-              }
-            />
-            <Route
-              exact
-              path="/health"
-              element={
-                <News
-                  setProgress={this.setProgress}
-                  key="health"
-                  country="in"
-                  category="health"
-                  pageSize={this.pageSize}
-                />
-              }
-            />
-          </Routes>
-        </Router>
-      </div>
-    );
-  }
-}
+          <Route
+            path="/business"
+            element={
+              <News
+                apiKey={apiKey}
+                setProgress={setProgress}
+                key="business"
+                pageSize={pageSize}
+                country="in"
+                category="business"
+              />
+            }
+          />
+          <Route
+            path="/entertainment"
+            element={
+              <News
+                apiKey={apiKey}
+                setProgress={setProgress}
+                key="entertainment"
+                pageSize={pageSize}
+                country="in"
+                category="entertainment"
+              />
+            }
+          />
+          <Route
+            path="/general"
+            element={
+              <News
+                apiKey={apiKey}
+                setProgress={setProgress}
+                key="general"
+                pageSize={pageSize}
+                country="in"
+                category="general"
+              />
+            }
+          />
+          <Route
+            path="/health"
+            element={
+              <News
+                apiKey={apiKey}
+                setProgress={setProgress}
+                key="health"
+                pageSize={pageSize}
+                country="in"
+                category="health"
+              />
+            }
+          />
+          <Route
+            path="/science"
+            element={
+              <News
+                apiKey={apiKey}
+                setProgress={setProgress}
+                key="science"
+                pageSize={pageSize}
+                country="in"
+                category="science"
+              />
+            }
+          />
+          <Route
+            path="/sports"
+            element={
+              <News
+                apiKey={apiKey}
+                setProgress={setProgress}
+                key="sports"
+                pageSize={pageSize}
+                country="in"
+                category="sports"
+              />
+            }
+          />
+          <Route
+            path="/technology"
+            element={
+              <News
+                apiKey={apiKey}
+                setProgress={setProgress}
+                key="technology"
+                pageSize={pageSize}
+                country="in"
+                category="technology"
+              />
+            }
+          />
+        </Routes>
+      </Router>
+    </div>
+  );
+};
+export default App;
